@@ -1,0 +1,93 @@
+<div class="registration-container">
+  <div class="registration-card">
+    <h2 class="registration-title">Seller Registration</h2>
+    <p class="registration-subtitle">Create your seller account to start your business</p>
+    
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="registration-form">
+      <div class="form-grid">
+        <!-- Personal Information Section -->
+        <div class="form-section">
+          <h3 class="section-title">Personal Information</h3>
+          <div class="form-group">
+            <label for="userName">Username</label>
+            <input type="text" id="userName" formControlName="userName" placeholder="Enter your username">
+            <div *ngIf="form.get('userName')?.invalid && form.get('userName')?.touched" class="error-message">
+              Username is required
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" formControlName="email" placeholder="Enter your email">
+            <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="error-message">
+              Please enter a valid email
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="password-input">
+              <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="password" placeholder="Create password">
+              <button type="button" class="toggle-password" (click)="showPassword = !showPassword">
+                <i class="material-icons">{{ showPassword ? 'visibility_off' : 'visibility' }}</i>
+              </button>
+            </div>
+            <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="error-message">
+              Password must be at least 8 characters
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="address">Address</label>
+            <textarea id="address" formControlName="address" rows="3" placeholder="Enter your business address"></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="tel" id="phoneNumber" formControlName="phoneNumber" placeholder="Enter phone number">
+          </div>
+        </div>
+        
+        <!-- Business Information Section -->
+        <div class="form-section">
+          <h3 class="section-title">Business Information</h3>
+          <div class="form-group">
+            <label for="businessName">Business Name</label>
+            <input type="text" id="businessName" formControlName="businessName" placeholder="Enter your business name">
+          </div>
+          
+          <div class="form-group">
+            <label for="businessType">Business Type</label>
+            <select id="businessType" formControlName="businessType">
+              <option value="" disabled selected>Select Business Type</option>
+              <option value="SoleProprietorship">Sole Proprietorship</option>
+              <option value="Partnership">Partnership</option>
+              <option value="PrivateLimited">Private Limited</option>
+              <option value="PublicLimited">Public Limited</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="gstNumber">GST Number</label>
+            <input type="text" id="gstNumber" formControlName="gstNumber" placeholder="Enter GST number">
+            <div class="hint-text">Format: 22AAAAA0000A1Z5</div>
+          </div>
+          
+          <div class="form-group terms-group">
+            <input type="checkbox" id="terms" formControlName="terms">
+            <label for="terms">I agree to the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a></label>
+          </div>
+        </div>
+      </div>
+      
+      <button type="submit" class="submit-btn" [disabled]="form.invalid">
+        Make Payment Of Rs 1 For Registration
+        <i class="material-icons">arrow_forward</i>
+      </button>
+      
+      <div class="login-link">
+        Already have an account? <a routerLink="/auth/login">Login here</a>
+      </div>
+    </form>
+  </div>
+</div>

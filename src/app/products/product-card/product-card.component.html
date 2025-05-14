@@ -1,0 +1,92 @@
+<!-- <mat-card class="product-card">
+
+    <div class="badge-container" >
+      <span class="badge sale-badge" *ngIf="product.isFeatured">Featured</span>
+      <span class="badge mx-2" *ngIf="product.isOnDiscount">{{ product.discountPercentage }}%</span>
+    </div>
+  
+    
+    <img mat-card-image [src]="product.thumbnail?.imageUrl|renderimg" alt="{{ product.name }}">
+
+    <div class="action-icons">
+      <button mat-icon-button matTooltip="View Details" [routerLink]="['product',product.id]"><mat-icon>visibility</mat-icon></button>
+      <button mat-icon-button matTooltip="Add To WishList" (click)="addToWishList(product.id)"><mat-icon>favorite</mat-icon></button>
+    
+    </div>
+ 
+    <mat-card-content class="product-card-content">
+      <div class="category">{{ product.category.name }}</div>
+      <h2 class="product-name">{{ product.name }}</h2>
+      <div class="rating">
+        <s-rating [rating]="4"></s-rating>
+        <span class="rating-value">{{ product.averageRating }} ({{ product.totalReviews }})</span>
+      </div>
+    </mat-card-content>
+ 
+    <mat-card-actions class="product-card-action">
+      <div class="price">
+        <span class="current-price">{{ product.newPrice|currency:'INR' }}</span>
+        <span class="old-price" *ngIf="product.originalPrice">{{ product.originalPrice|currency:'INR' }}</span>
+      </div>
+      <button mat-raised-button matTooltip="Add To Cart" class="app-btn-primary" (click)="addToCart(product.id)">+ Add</button>
+    </mat-card-actions>
+  </mat-card>
+   -->
+
+   <mat-card class="product-card" [@cardHover]="hoverState" (mouseenter)="hoverState = 'hover'" (mouseleave)="hoverState = 'rest'">
+    <!-- Badges Container -->
+    <div class="badge-container">
+        <span class="badge featured-badge" *ngIf="product.isFeatured">
+            <mat-icon>star</mat-icon>
+            <span>Featured</span>
+        </span>
+        <span class="badge discount-badge" *ngIf="product.isOnDiscount">
+            <span>{{ product.discountPercentage }}% OFF</span>
+        </span>
+    </div>
+
+    <!-- Product Image with Hover Effect -->
+    <div class="product-image-container">
+        <img mat-card-image [src]="product.thumbnail?.imageUrl|renderimg" alt="{{ product.name }}" class="product-image">
+        <div class="image-overlay"></div>
+    </div>
+
+    <!-- Quick Action Buttons -->
+    <div class="action-buttons">
+        <button mat-fab extended color="primary" class="action-btn view-btn" 
+                [routerLink]="['product',product.id]" matTooltip="View Details">
+            <mat-icon>visibility</mat-icon>
+            <span>Quick View</span>
+        </button>
+        <button mat-fab class="action-btn wishlist-btn" 
+                (click)="addToWishList(product.id)" matTooltip="Add to Wishlist">
+            <mat-icon>favorite</mat-icon>
+        </button>
+    </div>
+
+    <!-- Product Details -->
+    <mat-card-content class="product-details">
+        <div class="product-category">{{ product.category.name }}</div>
+        <h3 class="product-title">{{ product.name }}</h3>
+        
+        <div class="product-rating">
+            <s-rating [rating]="4"></s-rating>
+            <span class="rating-count">({{ product.totalReviews }})</span>
+        </div>
+    </mat-card-content>
+
+    <!-- Price and Add to Cart -->
+    <mat-card-actions class="product-footer">
+        <div class="price-container">
+            <span class="current-price">{{ product.newPrice|currency:'INR' }}</span>
+            <span class="original-price" *ngIf="product.originalPrice">{{ product.originalPrice|currency:'INR' }}</span>
+        </div>
+        
+        <button mat-raised-button color="primary" class="add-to-cart-btn" 
+                (click)="addToCart(product.id)" [@pulse]="addedToCart">
+            <span *ngIf="!addedToCart">Add to Cart</span>
+            <span *ngIf="addedToCart">Added!</span>
+            <mat-icon>shopping_cart</mat-icon>
+        </button>
+    </mat-card-actions>
+</mat-card>

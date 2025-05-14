@@ -1,0 +1,119 @@
+/* Modal Styles */
+.modal-dialog {
+    max-width: 900px; /* Make the modal wider */
+  }
+  
+  .modal-content {
+    padding: 20px;
+  }
+  
+  .modal-header {
+    border-bottom: none; /* Remove bottom border */
+  }
+  
+  .modal-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .modal-body {
+    padding: 20px 30px;
+  }
+  
+  .modal-footer {
+    border-top: none; /* Remove top border */
+  }
+  
+  .modal-footer button {
+    margin-right: 10px;
+  }
+  
+  /* Form Styles inside Modal */
+  .container-fluid {
+    padding: 20px;
+  }
+  
+  .form-row {
+    margin-bottom: 15px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .form-control {
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .validation-msg {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 5px;
+  }
+  
+  /* Input and Select Fields */
+  input[type="text"],
+  input[type="number"],
+  input[type="file"],
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+  /* Submit Button */
+  .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+  
+  .btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+  }
+  
+  /* File Upload */
+  .form-control-file {
+    padding: 8px;
+    border: 1px solid #ccc;
+  }
+  
+  .d-flex {
+    display: flex;
+  }
+  
+  .justify-content-end {
+    justify-content: flex-end;
+  }
+  
+  /* Modal Close Button */
+  .close {
+    font-size: 1.5rem;
+    color: #000;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #dc3545;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  

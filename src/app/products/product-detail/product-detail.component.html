@@ -1,0 +1,102 @@
+<!-- <div *ngIf="product" class="product-container container">
+    <div class="image-section">
+        <img [src]="product.thumbnail?.imageUrl|renderimg" alt="Product Image" class="main-image">
+     
+    </div>
+    <div class="details-section">
+        <p class="category">{{product.category.name}}</p>
+        <h1 class="product-title">{{product.name}}</h1>
+        <div class="reviews">
+            <span class="stars">★★★★★</span> <span class="reviews-count">({{product.totalReviews}} reviews)</span>
+        </div>
+        <div class="price-section">
+            <span class="current-price">{{product.newPrice|currency:'INR'}}</span>
+            <span class="old-price">{{product.originalPrice|currency:'INR'}}</span>
+            <span class="discount">{{product.discountPercentage}}% Off</span>
+        </div>
+      
+        <div class="quantity-section">
+            <button class="quantity-btn" (click)="updateQuantity(quantity-1)">-</button>
+            <input type="number" [(ngModel)]="quantity" min="1" max="10" class="quantity-input">
+            <button class="quantity-btn" (click)="updateQuantity(quantity+1)">+</button>
+        </div>
+        <div class="actions">
+            <button mat-raised-button class="app-btn-primary" (click)="addToCart(product.id)">Add To Cart</button>
+            <button mat-raised-button class="wishlist-btn" (click)="addToWishList(product.id)">
+                <mat-icon class="m-0">favorite</mat-icon>
+            </button>
+        </div>
+        <div class="product-info">
+            <p>Product Code: <span class="info-value">FBB00255</span></p>
+            <p>Availability: 
+                <span class="info-value" *ngIf="product.inStock">In Stock</span>
+                <span class="info-value" *ngIf="!product.inStock">Out Of Stock</span>
+            </p>
+            <p>Brand: <span class="info-value">{{product.brand.name}}</span></p>
+            <p>Shipping: <span class="info-value">01 day shipping. (Free pickup today)</span></p>
+        </div>
+    </div>
+</div> -->
+<div *ngIf="product" class="product-container container">
+    <div class="image-section">
+        <img [src]="product.thumbnail?.imageUrl|renderimg" alt="Product Image" class="main-image">
+     
+    </div>
+    <div class="details-section">
+        <p class="category">{{product.category.name}}</p>
+        <h1 class="product-title">{{product.name}}</h1>
+        <div class="reviews">
+            <span class="stars">★★★★★</span> <span class="reviews-count">({{product.totalReviews}} reviews)</span>
+        </div>
+        <div class="price-section">
+            <span class="current-price">{{product.newPrice|currency:'INR'}}</span>
+            <span class="old-price">{{product.originalPrice|currency:'INR'}}</span>
+            <span class="discount">{{product.discountPercentage}}% Off</span>
+        </div>
+      
+        <div class="quantity-section">
+            <button class="quantity-btn" (click)="updateQuantity(quantity-1)">-</button>
+            <input type="number" [(ngModel)]="quantity" min="1" max="10" class="quantity-input">
+            <button class="quantity-btn" (click)="updateQuantity(quantity+1)">+</button>
+        </div>
+        <div class="actions">
+            <button mat-raised-button class="app-btn-primary" (click)="addToCart(product.id)">Add To Cart</button>
+            <button mat-raised-button class="wishlist-btn" (click)="addToWishList(product.id)">
+                <mat-icon class="m-0">favorite</mat-icon>
+            </button>
+        </div>
+        <div class="product-info">
+            <p>Product Code: <span class="info-value">FBB00255</span></p>
+            <p>Availability: 
+                <span class="info-value" *ngIf="product.inStock">In Stock</span>
+                <span class="info-value" *ngIf="!product.inStock">Out Of Stock</span>
+            </p>
+            <p>Brand: <span class="info-value">{{product.brand.name}}</span></p>
+            <p>Shipping: <span class="info-value">01 day shipping. (Free pickup today)</span></p>
+        </div>
+        <div class="add-review-section">
+            <h2>Add a Review</h2>
+            <form #reviewForm="ngForm" (ngSubmit)="submitReview(reviewForm)" class="review-form">
+
+                <div class="form-group">
+                    <label for="review">Your Review</label>
+                    <textarea id="review" class="form-control" rows="3" [(ngModel)]="reviewText" name="review" required></textarea>
+                </div>
+        
+                <div class="form-group">
+                    <label for="rating">Rating</label>
+                    <select id="rating" class="form-control" [(ngModel)]="rating" name="rating" required>
+                        <option [ngValue]="5">5 - Excellent</option>
+                        <option [ngValue]="4">4 - Good</option>
+                        <option [ngValue]="3">3 - Average</option>
+                        <option [ngValue]="2">2 - Poor</option>
+                        <option [ngValue]="1">1 - Terrible</option>
+                    </select>
+                </div>
+        
+                <button mat-raised-button color="primary" type="submit" [disabled]="reviewForm.invalid">Submit Review</button>
+            </form>
+        </div>
+        
+    </div>
+</div>

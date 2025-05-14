@@ -1,0 +1,89 @@
+<div class="container-fluid">
+  <h2>Add Product</h2>
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label>Product Name*</label>
+        <input type="text" formControlName="name" class="form-control" placeholder="Enter product name" />
+        <div class="validation-msg" *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched">
+          Product Name is required.
+        </div>
+      </div>
+      
+      <div class="form-group col-md-4">
+        <label>Original Price*</label>
+        <input type="number" formControlName="originalPrice" class="form-control" placeholder="Enter price" />
+        <div class="validation-msg"
+          *ngIf="productForm.get('originalPrice')?.invalid && productForm.get('originalPrice')?.touched">
+          Original price is required.
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label>Stock Quantity*</label>
+        <input type="number" formControlName="stockQuantity" class="form-control" placeholder="Enter quantity" />
+        <div class="validation-msg"
+          *ngIf="productForm.get('stockQuantity')?.invalid && productForm.get('stockQuantity')?.touched">
+          Stock quantity is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+     
+      <div class="form-group col-md-4">
+        <label>Discount Percentage</label>
+        <input type="number" formControlName="discountPercentage" (input)="calculatePrice()" class="form-control"
+          placeholder="Enter discount %" />
+      </div>
+      <div class="form-group col-md-4">
+        <label>Discount Amount</label>
+        <input type="number" formControlName="discountAmount" class="form-control" readonly />
+      </div>
+      <div class="form-group col-md-4">
+        <label>New Price</label>
+        <input type="number" formControlName="newPrice" class="form-control" readonly />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label>Category*</label>
+        <select formControlName="categoryId" class="form-control">
+          <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+        </select>
+        <div class="validation-msg"
+          *ngIf="productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched">
+          Please select a category.
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label>Brand*</label>
+        <select formControlName="brandId" class="form-control">
+          <option *ngFor="let brand of brands" [value]="brand.id">{{ brand.name }}</option>
+        </select>
+        <div class="validation-msg"
+          *ngIf="productForm.get('brandId')?.invalid && productForm.get('brandId')?.touched">
+          Please select a brand.
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label>Description</label>
+        <input formControlName="description" class="form-control" placeholder="Enter description">
+      </div>
+    </div>
+
+   
+    <div class="row">
+     
+      <div class="col-md-10">
+        <label>Upload Images</label>
+        <input type="file" (change)="onFileSelected($event)" class="form-control-file"  multiple accept="image/*" />
+      </div>
+      
+      <div class="d-flex justify-content-end col-md-2">
+        <button type="submit" class="btn btn-success btn-block" [disabled]="productForm.invalid"><span>Submit</span></button>
+      </div>
+    </div>
+
+
+  </form>
+</div>

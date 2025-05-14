@@ -1,0 +1,25 @@
+<div class="reset-password-container">
+    <h2>Reset Password</h2>
+    <form [formGroup]="resetPasswordForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="newPassword">New Password</label>
+        <input id="newPassword" formControlName="newPassword" type="password" class="form-control" placeholder="Enter new password" />
+        <div *ngIf="resetPasswordForm.get('newPassword')?.invalid && resetPasswordForm.get('newPassword')?.touched" class="text-danger">
+          Password must be at least 6 characters long.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input id="confirmPassword" formControlName="confirmPassword" type="password" class="form-control" placeholder="Confirm new password" />
+        <div *ngIf="resetPasswordForm.get('confirmPassword')?.invalid && resetPasswordForm.get('confirmPassword')?.touched" class="text-danger">
+          Please confirm your password.
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="loading">
+        {{ loading ? 'Resetting...' : 'Reset Password' }}
+      </button>
+    </form>
+  </div>
+  

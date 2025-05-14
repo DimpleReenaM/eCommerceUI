@@ -1,0 +1,48 @@
+<!-- <div class="row align-items-center">
+    <span class="products-found col-6">24 Products found</span>
+
+    <div class="sort-dropdown col-6 row">
+        <div class="col-6"> 
+            <select [(ngModel)]="itemsToShow" (change)="itemsToShowChange()" class="form-select" aria-label="Default select example">
+                <option *ngFor="let option of showOptions" [value]="option">
+                    {{ option }}
+                </option>
+            </select>
+
+        
+        </div>
+        <div class="col-6">
+            <select [(ngModel)]="sortBy" (change)="sortByChange()" class="form-select" aria-label="Default select example">
+                <option *ngFor="let option of sortOptions" [value]="option.sortCode">
+                    {{ option.sortName }}
+                </option>
+            </select>
+
+
+         
+        </div>
+    </div>
+</div> -->
+<div class="row align-items-center product-controls">
+    <span class="products-found col-md-6 animate-fade-in">6 Products Found</span>
+
+    <div class="sort-dropdown col-md-6 row">
+        <div class="col-md-6 mb-2 mb-md-0 pe-md-2 animate-slide-right"> 
+            <select [(ngModel)]="itemsToShow" (change)="itemsToShowChange()" 
+                    class="form-select form-select-sm hover-grow">
+                <option *ngFor="let option of showOptions" [value]="option">
+                    Show: {{ option }}
+                </option>
+            </select>
+        </div>
+        <div class="col-md-6 ps-md-2 animate-slide-left">
+            <select [(ngModel)]="sortBy" (change)="sortByChange()" 
+                    class="form-select form-select-sm hover-grow">
+                <option value="" disabled selected>Sort By</option>
+                <option *ngFor="let option of sortOptions" [value]="option.sortCode">
+                    {{ option.sortName }}
+                </option>
+            </select>
+        </div>
+    </div>
+</div>
