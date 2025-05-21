@@ -1,31 +1,18 @@
-<!-- order-tracker.component.html -->
-<div class="order-tracker">
-    <div>
-        <mat-icon class="confirmed">shopping_cart</mat-icon><strong> Order Placed</strong>
+<div class="order-tracker d-flex justify-content-between align-items-center">
+  <ng-container *ngFor="let step of steps; let last = last">
+    <div class="tracker-step text-center" [ngClass]="{ 'completed': isStepCompleted(step) }">
+      <mat-icon>
+        {{
+          step === 'Placed' ? 'shopping_cart' :
+          step === 'Confirmed' ? 'check_circle' :
+          step === 'Shipped' ? 'local_shipping' :
+          step === 'Out For Delivery' ? 'local_shipping' :
+          step === 'Delivered' ? 'home' : 'circle'
+        }}
+      </mat-icon>
+      <div class="step-label">{{ step }}</div>
     </div>
-    <div class="separator"></div> <!-- Horizontal line div -->
-
-    <div [ngClass]="paymentStatus.toLowerCase()=='failed'?'failed':'confirmed'">
-        <mat-icon>payments</mat-icon><strong> Payments {{paymentStatus}}</strong>
-    </div>
-    <div class="separator"></div> <!-- Horizontal line div -->
-
-    <div>
-        <mat-icon>check_circle</mat-icon><strong> Order Confirmed</strong>
-    </div>
-    <div class="separator"></div> <!-- Horizontal line div -->
-
-    <div>
-        <mat-icon>local_shipping</mat-icon><strong> Shipped</strong>
-    </div>
-    <div class="separator"></div> <!-- Horizontal line div -->
-
-    <div>
-        <mat-icon>local_shipping</mat-icon><strong> Out For Delivery</strong>
-    </div>
-    <div class="separator"></div> <!-- Horizontal line div -->
-
-    <div>
-        <mat-icon>home</mat-icon><strong> Delivered</strong>
-    </div>
+    <!-- Horizontal line between steps -->
+    <div class="separator flex-grow-1 mx-2" *ngIf="!last"></div>
+  </ng-container>
 </div>

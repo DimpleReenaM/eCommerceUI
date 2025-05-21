@@ -1,7 +1,9 @@
 <div class="container mb-5">
     <div class="my-3">
-        <app-order-tracker [paymentStatus]="details.paymentDetails.status"></app-order-tracker>
-    </div>
+<app-order-tracker
+  [paymentStatus]="details.paymentDetails.status"
+  [orderStatus]="details.order.status">
+</app-order-tracker>    </div>
     <div class="row">
         <div class="col-7">
             <mat-card class="mb-5">

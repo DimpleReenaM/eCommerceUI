@@ -1,38 +1,44 @@
-/* order-tracker.component.css */
 .order-tracker {
-    // max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    height: 10vh;
-    border-radius: 10px;
-    background-color: #fff;
-
-    display: flex
-;
-    justify-content: space-evenly;
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  .tracker-step {
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    color: black;
+    &.completed {
+      color: green;
+    }
+    mat-icon {
+      font-size: 28px;
+    }
+    .step-label {
+      font-size: 12px;
+    }
   }
-  mat-icon {
-    vertical-align: middle;
-    margin-right: 8px;
-  }
-
 
   .separator {
-    border-top-width: 1px;
-    border-top-style: solid;
-    flex: auto;
-    height: 0;
-    min-width: 32px;
-    background-color: #ddd; 
-    border-top-color:#ddd;
+    height: 2px;
+    background-color: #ccc;
+    &.completed {
+      background-color: green;
+    }
+  }
 }
-.confirmed{
-color: green;
+.tracker-step {
+  color: #6c757d;
+
+  &.completed {
+    color: #28a745;
+  }
+
+  &.cancelled {
+    color: red;
+
+    mat-icon {
+      color: red;
+    }
+  }
 }
 
-.failed{
-  color: red;
-}
-
-  

@@ -6,15 +6,38 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./order-tracker.component.scss']
 })
 export class OrderTrackerComponent {
-  steps:string[] = [
-    "Placed",
-    'Order Confirmed',
-    'Shipped',
-    'Out For Delivery',
-    'Delivered'
-  ];
+
 
   @Input() orderStatus!:string;
   @Input() paymentStatus!:string;
-  
+    steps: string[] = [
+    'Placed',
+    'Confirmed',
+    'Shipped',
+    'Out For Delivery',
+    'Delivered',
+    'Cancelled'
+  ];
+
+  isStepCompleted(step: string): boolean {
+     if (this.orderStatus === 'Cancelled') {
+    return step === 'Cancelled';
+  }
+
+    const statusOrder = [
+      'Placed',
+      'Confirmed',
+      'Shipped',
+      'Out For Delivery',
+      'Delivered',
+      'Cancelled'
+    ];
+
+    const currentStatus = this.paymentStatus.toLowerCase() === 'failed' ? 'Payment Failed' : this.orderStatus;
+    const currentIndex = statusOrder.indexOf(
+      currentStatus === 'Payment Failed' ? 'Payment' : currentStatus
+    );
+
+    return statusOrder.indexOf(step) <= currentIndex && this.paymentStatus.toLowerCase() !== 'failed';
+  }
 }
