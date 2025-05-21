@@ -11,6 +11,8 @@ import { AuthService } from 'src/app/core/Services/auth.service';
 })
 export class LoginComponent implements OnInit {
    loginForm!:FormGroup;
+     particles: any[] = [];
+
 
    constructor(private fb:FormBuilder,private authService:AuthService,private router:Router){}
 
@@ -19,6 +21,8 @@ export class LoginComponent implements OnInit {
       email: new FormControl('',[Validators.required,Validators.email]),
       password:new FormControl('',Validators.required)
     })
+        this.createParticles();
+
   }
 
   Login(){
@@ -42,4 +46,20 @@ export class LoginComponent implements OnInit {
       )
     }
   }
+
+ createParticles() {
+  const particleCount = 500;
+  for (let i = 0; i < particleCount; i++) {
+    this.particles.push({
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      width: `${Math.random() * 10 + 5}px`,
+      height: `${Math.random() * 10 + 5}px`,
+      opacity: Math.random() * 0.5 + 0.5, // Increased opacity range (0.5 to 1)
+      'animation-delay': `${Math.random() * 5}s`, // Reduced max delay from 15s to 5s
+      'animation-duration': `${Math.random() * 10 + 5}s` // Reduced max duration from 30s to 15s
+    });
+  }
+}
+
 }

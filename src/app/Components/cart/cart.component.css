@@ -1,4 +1,4 @@
-.icon-xxl {
+/* .icon-xxl {
     height: 4rem;
     line-height: 4rem;
     width: 4rem;
@@ -40,4 +40,133 @@
 .checkout-btn{
     display: flex;
     justify-content: space-between;
+} */
+
+
+.cart-section {
+    background-color: #f8f9fa;
+    min-height: calc(100vh - 150px);
+}
+
+.cart-item {
+    transition: background-color 0.2s ease;
+}
+
+.cart-item:hover {
+    background-color: #f8f9fa;
+}
+
+.quantity-controls {
+    border: 1px solid #dee2e6;
+    border-radius: 50px;
+    width: fit-content;
+}
+
+.quantity-controls button {
+    line-height: 1;
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
+}
+
+.quantity-display {
+    min-width: 30px;
+    text-align: center;
+}
+
+.current-price {
+    font-size: 1.1rem;
+}
+
+.old-price {
+    font-size: 0.9rem;
+}
+
+.checkout-btn {
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.checkout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 767.98px) {
+    .cart-item {
+        padding: 1rem !important;
+    }
+    
+    .cart-item img {
+        max-height: 80px;
+        width: auto;
+    }
+}
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  border-radius: 50px;
+  background-color: #f8f9fa;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  border: 1px solid #e0e0e0;
+}
+
+.quantity-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  color: #555;
+}
+
+.quantity-btn:hover {
+  background-color: #f1f1f1;
+}
+
+.quantity-btn:active {
+  transform: scale(0.95);
+}
+
+.quantity-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #f8f9fa;
+}
+
+.quantity-btn.increment {
+  color: #28a745; /* Green color for increment */
+}
+
+.quantity-btn.decrement {
+  color: #dc3545; /* Red color for decrement */
+}
+
+.quantity-display {
+  width: 40px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* For larger screens */
+@media (min-width: 768px) {
+  .quantity-controls {
+    border-radius: 8px;
+  }
+  
+  .quantity-btn {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .quantity-display {
+    width: 46px;
+    font-size: 1rem;
+  }
 }
