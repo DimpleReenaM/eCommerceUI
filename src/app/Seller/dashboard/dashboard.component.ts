@@ -6,6 +6,7 @@ import * as bootstrap from 'bootstrap';
 import { MyBrand } from 'src/app/core/Models/MyBrand';
 import { MyCategory } from 'src/app/core/Models/MyCategory';
 import { MyProduct } from 'src/app/core/Models/MyProduct';
+import { UserDto } from 'src/app/core/Models/user';
 import { AuthService } from 'src/app/core/Services/auth.service';
 import { CatalogService } from 'src/app/core/Services/catalog.service';
 import { MybrandService } from 'src/app/core/Services/mybrand.service';
@@ -27,6 +28,10 @@ export class DashboardComponent {
   uploadedImages: File[] = [];
   editingProductId: any = null;
   modalVisible: boolean = false;
+  user: UserDto | null = null;
+  sellername: string = ''
+
+
 
   constructor(
     private productService1: SellerService,
@@ -51,7 +56,7 @@ export class DashboardComponent {
       categoryId: ['', Validators.required],
       brandId: ['', Validators.required],
       thumbnail: [null],
-        isActive: [true]  // ✅ default to true when adding
+      isActive: [true]  // ✅ default to true when adding
 
     });
   }
@@ -62,43 +67,50 @@ export class DashboardComponent {
     this.productForm.valueChanges.subscribe(() => {
       this.calculatePrice();
     });
+    const userJson = localStorage.getItem('currentUser');
+    if (userJson) {
+      const user = JSON.parse(userJson);
+      this.sellername = user.userName; // Extract the username
+    }
+
+
   }
 
   // Open Modal (Add or Edit)
-openModal(product: MyProduct | null = null): void {
-  const modalElement = document.getElementById('productModal');
-  if (modalElement) {
-    const modal = new bootstrap.Modal(modalElement);
-    modal.show();
-  } else {
-    console.error('Modal element not found');
-  }
+  openModal(product: MyProduct | null = null): void {
+    const modalElement = document.getElementById('productModal');
+    if (modalElement) {
+      const modal = new bootstrap.Modal(modalElement);
+      modal.show();
+    } else {
+      console.error('Modal element not found');
+    }
 
-  this.modalVisible = true;
-  if (product) {
-    this.editingProductId = product.id;
-    // Populate form for editing
-    this.productForm.patchValue({
-      id: product.id,
-      name: product.name,
-      description: product.description,
-      originalPrice: product.originalPrice,
-      stockQuantity: product.stockQuantity,
-      discountPercentage: product.discountPercentage,
-      discountAmount: product.discountAmount,
-      newPrice: product.newPrice,
-      categoryId: product.category.id,
-      brandId: product.brand.id,
-      isActive: product.isDeleted
-    });
-  } else {
-    this.productForm.reset();  // Reset for new product
-    this.editingProductId = null;
+    this.modalVisible = true;
+    if (product) {
+      this.editingProductId = product.id;
+      // Populate form for editing
+      this.productForm.patchValue({
+        id: product.id,
+        name: product.name,
+        description: product.description,
+        originalPrice: product.originalPrice,
+        stockQuantity: product.stockQuantity,
+        discountPercentage: product.discountPercentage,
+        discountAmount: product.discountAmount,
+        newPrice: product.newPrice,
+        categoryId: product.category.id,
+        brandId: product.brand.id,
+        isActive: product.isDeleted
+      });
+    } else {
+      this.productForm.reset();  // Reset for new product
+      this.editingProductId = null;
+    }
+    this.productForm.get('discountAmount')?.disable();
+    this.productForm.get('newPrice')?.disable();
+    this.selectedFile = null;
   }
-  this.productForm.get('discountAmount')?.disable();
-  this.productForm.get('newPrice')?.disable();
-  this.selectedFile = null;
-}
 
 
   // Close Modal
@@ -118,7 +130,7 @@ openModal(product: MyProduct | null = null): void {
 
   // Resolve Image URL
   getImageUrl(imagePath: string | null | undefined): string {
-    if (!imagePath) return 'assets/default-image.jpg'; 
+    if (!imagePath) return 'assets/default-image.jpg';
     return `https://localhost:7174/${imagePath}`;
   }
 
@@ -248,11 +260,11 @@ openModal(product: MyProduct | null = null): void {
     }
   }
   getLowStockCount(): number {
-  return this.products.filter(p => p.stockQuantity < 10).length;
-}
-// getDiscountedCount(): number {
-//   return this.products.filter(p => p.discountPercentage > 0).length;
-// }
+    return this.products.filter(p => p.stockQuantity < 10).length;
+  }
+  // getDiscountedCount(): number {
+  //   return this.products.filter(p => p.discountPercentage > 0).length;
+  // }
 
   // Delete Product
   deleteProduct(id: number) {
@@ -263,8 +275,10 @@ openModal(product: MyProduct | null = null): void {
     }
   }
 
-   logout(){
+  logout() {
     this.authService.LogOut().subscribe();
     this.router.navigateByUrl('/');
   }
+
+
 }

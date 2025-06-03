@@ -36,13 +36,13 @@
                             </div>
                         </td>
                         <td >
-                            <span *ngIf="item.product.inStock" class="badge badge-success">In Stock</span>
-                            <span *ngIf="!item.product.inStock" class="badge badge-danger">Out of Stock</span>
+                            <span *ngIf="item.product.stockQuantity>0" class="badge badge-success">In Stock</span>
+                            <span *ngIf="item.product.stockQuantity==0" class="badge badge-danger">Out of Stock</span>
                         </td>
                         <td>
-                            <button *ngIf="item.product.inStock" class="btn btn-sm btn-primary" (click)="addToCart(item.productId)">Add to
+                            <button *ngIf="item.product.stockQuantity>0" class="btn btn-sm btn-primary" (click)="addToCart(item.productId)">Add to
                                 Cart</button>
-                            <button *ngIf="!item.product.inStock" class="btn btn-sm btn-danger" (click)="contactUs(item)">Contact
+                            <button *ngIf="item.product.stockQuantity==0" class="btn btn-sm btn-danger" (click)="contactUs(item)">Contact
                                 us</button>
                         </td>
                         <td>

@@ -6,6 +6,8 @@ import { AddToCart } from 'src/app/redux/cart/cart.action';
 import { AppState } from 'src/app/redux/store';
 import { AddToWishList } from 'src/app/redux/wishlist/wishlist.action';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
+import { AuthService } from 'src/app/core/Services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-card',
@@ -37,13 +39,18 @@ export class ProductCardComponent {
   hoverState: 'rest' | 'hover' = 'rest';   // default value is 'rest'
 addedToCart: boolean = false;    
 
-  constructor(@Inject(BASE_IMAGE_API) public imageUrl: string,private store:Store<AppState>) {}
+  constructor(@Inject(BASE_IMAGE_API) public imageUrl: string,private store:Store<AppState>,private authservice:AuthService,private router:Router) {}
    
   @Input() product!:ProductResDto;
 
-  addToCart(productId:number){
-      this.store.dispatch(AddToCart({productId,quantity:1}))
+addToCart(productId: number) {
+  if (this.authservice.UserLoggedIn()) {
+    this.store.dispatch(AddToCart({ productId, quantity: 1 }));
+  } else {
+    this.router.navigate(['/auth/login']);
   }
+}
+
 
   addToWishList(productId:number){
     this.store.dispatch(AddToWishList({productId}))
