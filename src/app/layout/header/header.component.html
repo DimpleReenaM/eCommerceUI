@@ -188,8 +188,8 @@
             <mat-icon>account_circle</mat-icon>
           </button>
           <mat-menu #loginMenu="matMenu" class="user-menu"> 
-            <div class="user-menu-header">
-              <h6>{{auth.getLoggedInUserDetail()?.userName}}</h6>
+            <div class="user-menu-header d-flex flex-column align-items-center">
+              <h6 class="user-text">{{auth.getLoggedInUserDetail()?.userName}}</h6>
               <p>Your Account</p>
             </div>  
             <mat-divider></mat-divider>  
@@ -197,10 +197,7 @@
               <mat-icon class="menu-icon">receipt</mat-icon>
               <span>My Orders</span>
             </button>  
-            <button mat-menu-item>
-              <mat-icon class="menu-icon">settings</mat-icon>
-              <span>Account Settings</span>
-            </button>
+            
             <mat-divider></mat-divider>        
             <button mat-menu-item (click)="logout()">
               <mat-icon class="menu-icon">logout</mat-icon>

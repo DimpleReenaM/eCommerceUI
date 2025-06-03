@@ -3,7 +3,6 @@
     <div class="tracker-step text-center" [ngClass]="getStepClass(step)">
       <mat-icon>
         {{
-          step === 'Payment Failed' ? 'error' :
           step === 'Placed' ? 'shopping_cart' :
           step === 'Confirmed' ? 'check_circle' :
           step === 'Shipped' ? 'local_shipping' :
@@ -14,6 +13,6 @@
       </mat-icon>
       <div class="step-label">{{ step }}</div>
     </div>
-    <div class="separator flex-grow-1 mx-2" *ngIf="!last"></div>
+    <div class="separator flex-grow-1 mx-2" [ngClass]="getStepClass(step)" *ngIf="!last"></div>
   </ng-container>
 </div>

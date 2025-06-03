@@ -1,4 +1,3 @@
-
 import { Component, Input } from '@angular/core';
 
 @Component({
@@ -8,22 +7,26 @@ import { Component, Input } from '@angular/core';
 })
 export class OrderTrackerComponent {
   @Input() orderStatus!: string;
-  @Input() paymentStatus!: string;
+    @Input() paymentStatus!: string;
+
+
+  private readonly allSteps = ['Placed', 'Confirmed', 'Shipped', 'Out For Delivery', 'Delivered', 'Cancelled'];
 
   get steps(): string[] {
-    if (this.paymentStatus?.toLowerCase() === 'failed') {
-      return ['Payment Failed', 'Confirmed', 'Shipped', 'Out For Delivery', 'Delivered', 'Cancelled'];
+    // Only show "Cancelled" step when orderStatus is "Cancelled"
+    if (this.orderStatus === 'Cancelled') {
+      return this.allSteps;
     }
-    return ['Placed', 'Confirmed', 'Shipped', 'Out For Delivery', 'Delivered', 'Cancelled'];
+    return this.allSteps.filter(step => step !== 'Cancelled');
+  }
+
+  isCancelledStatus(): boolean {
+    return this.orderStatus === 'Cancelled';
   }
 
   isStepCompleted(step: string): boolean {
-    if (this.paymentStatus?.toLowerCase() === 'failed') {
-      return true;  // All steps appear completed when payment failed
-    }
-
-    if (this.orderStatus === 'Cancelled') {
-      return step === 'Cancelled';
+    if (this.isCancelledStatus()) {
+      return true; // All steps appear red when cancelled
     }
 
     const statusOrder = ['Placed', 'Confirmed', 'Shipped', 'Out For Delivery', 'Delivered'];
@@ -32,11 +35,8 @@ export class OrderTrackerComponent {
   }
 
   getStepClass(step: string): string {
-    if (this.paymentStatus?.toLowerCase() === 'failed') {
-      return 'failed';  // Apply orange color to all steps
-    }
-    if (this.orderStatus === 'Cancelled' && step === 'Cancelled') {
-      return 'cancelled';  // Optional special styling
+    if (this.isCancelledStatus()) {
+      return 'cancelled';
     }
     return this.isStepCompleted(step) ? 'completed' : '';
   }
