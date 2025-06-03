@@ -27,18 +27,20 @@
   }
 }
 .tracker-step {
-  color: #6c757d;
+  color: gray;  
 
   &.completed {
-    color: #28a745;
+    color: green;
+  }
+
+  &.failed {
+    color: orange;
   }
 
   &.cancelled {
     color: red;
-
-    mat-icon {
-      color: red;
-    }
   }
 }
+
+
 

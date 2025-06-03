@@ -214,10 +214,10 @@
     <!-- Bottom Row - Navigation -->
     <div class="row">
       <nav class="navbar main-navigation">
-        <button mat-flat-button [matMenuTriggerFor]="menu" class="categories-btn">
+        <!-- <button mat-flat-button [matMenuTriggerFor]="menu" class="categories-btn">
           <mat-icon>menu</mat-icon>
           <span>All Categories</span>
-        </button>
+        </button> -->
         <mat-menu #menu="matMenu" class="categories-menu">              
           <button mat-menu-item *ngFor="let cat of categories$|async">
             <span>{{cat.name}}</span>

@@ -1,3 +1,4 @@
+
 import { Component, Input } from '@angular/core';
 
 @Component({
@@ -6,38 +7,37 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./order-tracker.component.scss']
 })
 export class OrderTrackerComponent {
+  @Input() orderStatus!: string;
+  @Input() paymentStatus!: string;
 
-
-  @Input() orderStatus!:string;
-  @Input() paymentStatus!:string;
-    steps: string[] = [
-    'Placed',
-    'Confirmed',
-    'Shipped',
-    'Out For Delivery',
-    'Delivered',
-    'Cancelled'
-  ];
-
-  isStepCompleted(step: string): boolean {
-     if (this.orderStatus === 'Cancelled') {
-    return step === 'Cancelled';
+  get steps(): string[] {
+    if (this.paymentStatus?.toLowerCase() === 'failed') {
+      return ['Payment Failed', 'Confirmed', 'Shipped', 'Out For Delivery', 'Delivered', 'Cancelled'];
+    }
+    return ['Placed', 'Confirmed', 'Shipped', 'Out For Delivery', 'Delivered', 'Cancelled'];
   }
 
-    const statusOrder = [
-      'Placed',
-      'Confirmed',
-      'Shipped',
-      'Out For Delivery',
-      'Delivered',
-      'Cancelled'
-    ];
+  isStepCompleted(step: string): boolean {
+    if (this.paymentStatus?.toLowerCase() === 'failed') {
+      return true;  // All steps appear completed when payment failed
+    }
 
-    const currentStatus = this.paymentStatus.toLowerCase() === 'failed' ? 'Payment Failed' : this.orderStatus;
-    const currentIndex = statusOrder.indexOf(
-      currentStatus === 'Payment Failed' ? 'Payment' : currentStatus
-    );
+    if (this.orderStatus === 'Cancelled') {
+      return step === 'Cancelled';
+    }
 
-    return statusOrder.indexOf(step) <= currentIndex && this.paymentStatus.toLowerCase() !== 'failed';
+    const statusOrder = ['Placed', 'Confirmed', 'Shipped', 'Out For Delivery', 'Delivered'];
+    const currentIndex = statusOrder.indexOf(this.orderStatus);
+    return statusOrder.indexOf(step) <= currentIndex;
+  }
+
+  getStepClass(step: string): string {
+    if (this.paymentStatus?.toLowerCase() === 'failed') {
+      return 'failed';  // Apply orange color to all steps
+    }
+    if (this.orderStatus === 'Cancelled' && step === 'Cancelled') {
+      return 'cancelled';  // Optional special styling
+    }
+    return this.isStepCompleted(step) ? 'completed' : '';
   }
 }

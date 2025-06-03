@@ -1,18 +1,19 @@
 <div class="order-tracker d-flex justify-content-between align-items-center">
   <ng-container *ngFor="let step of steps; let last = last">
-    <div class="tracker-step text-center" [ngClass]="{ 'completed': isStepCompleted(step) }">
+    <div class="tracker-step text-center" [ngClass]="getStepClass(step)">
       <mat-icon>
         {{
+          step === 'Payment Failed' ? 'error' :
           step === 'Placed' ? 'shopping_cart' :
           step === 'Confirmed' ? 'check_circle' :
           step === 'Shipped' ? 'local_shipping' :
           step === 'Out For Delivery' ? 'local_shipping' :
-          step === 'Delivered' ? 'home' : 'circle'
+          step === 'Delivered' ? 'home' :
+          step === 'Cancelled' ? 'cancel' : 'circle'
         }}
       </mat-icon>
       <div class="step-label">{{ step }}</div>
     </div>
-    <!-- Horizontal line between steps -->
     <div class="separator flex-grow-1 mx-2" *ngIf="!last"></div>
   </ng-container>
 </div>

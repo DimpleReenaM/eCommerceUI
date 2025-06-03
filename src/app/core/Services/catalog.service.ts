@@ -23,6 +23,6 @@ export class CatalogService {
     return this.http.post<ResponseDto<ProductPaginationRes>>('Catalog/product/getall',filter)
   }
   getProductById(productId:string){
-    return this.http.get<ResponseDto<ProductResDto>>('Catalog/'+productId);
+    return this.http.get<ResponseDto<ProductResDto>>('Catalog/product/'+productId);
   }
 }
