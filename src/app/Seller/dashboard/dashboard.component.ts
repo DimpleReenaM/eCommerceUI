@@ -262,4 +262,9 @@ openModal(product: MyProduct | null = null): void {
       });
     }
   }
+
+   logout(){
+    this.authService.LogOut().subscribe();
+    this.router.navigateByUrl('/');
+  }
 }

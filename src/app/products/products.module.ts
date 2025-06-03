@@ -6,7 +6,6 @@ import { ProductsComponent } from './products.component';
 import { PraginationComponent } from './pragination/pragination.component';
 
 import { FiltersComponent } from './filters/filters.component';
-import {MatSliderModule} from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
@@ -22,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import {MatTabsModule} from '@angular/material/tabs'
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSliderModule } from '@angular/material/slider';
 
 
 

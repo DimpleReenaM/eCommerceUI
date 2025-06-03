@@ -61,19 +61,7 @@ const routes: Routes = [
       // },
       {
         path: 'reset-password', component: ForgetComponent },
-        {
-          path:'seller-register',
-          component:RegisterComponent
-        },
-        {
-          path:'seller-dashboard',
-          component:DashboardComponent
-        }
-       ,
-       {
-        path:'add-product',
-        component:AddProductComponent
-       }
+        
 
 
         
@@ -81,9 +69,14 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'seller',
+    loadChildren: () => import('./Seller/seller.module').then(m => m.SellerModule) 
+  },
+  {
     path:"auth",
     loadChildren:()=>import('./auth/auth.module').then(m=>m.AuthModule)
   },
+  
   {
     path:"**",
     component:NotfoundComponent

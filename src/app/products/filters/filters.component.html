@@ -27,7 +27,7 @@
             <mat-button-toggle [value]="false" (change)="toggleStock(false)">Out-Off-Stock</mat-button-toggle>
         </mat-button-toggle-group>
     </div>
-
+ 
     <div class="filter-section">
         <h3>Price</h3>
         <div class="filter-slider-container">
@@ -38,7 +38,7 @@
         </div>
         <p><small>Price: {{ selectedMinPrice||minPrice | currency:'INR' }} - {{ selectedMaxPrice||maxPrice | currency:'INR'}}</small></p>
     </div>
-
+ 
  
     <div class="filter-section">
         <h3>Rating</h3>
@@ -53,7 +53,7 @@
     <div class="filter-header">
         <h4>Filters</h4>
     </div>
-    
+   
     <div class="filter-section">
         <h3>Categories</h3>
         <div class="select-check-container">
@@ -64,7 +64,7 @@
             </p>
         </div>
     </div>
-    
+   
     <div class="filter-section">
         <h3>Brands</h3>
         <div class="select-check-container">
@@ -75,7 +75,7 @@
             </p>
         </div>
     </div>
-    
+   
     <div class="filter-section">
         <h3>Stock</h3>
         <mat-button-toggle-group name="fontStyle" aria-label="Font Style" class="stock-toggle-group">
@@ -83,7 +83,7 @@
             <mat-button-toggle [value]="false" (change)="toggleStock(false)" class="toggle-button">Out-of-Stock</mat-button-toggle>
         </mat-button-toggle-group>
     </div>
-    
+   
     <div class="filter-section">
         <h3>Price</h3>
         <div class="filter-slider-container">
@@ -94,7 +94,7 @@
         </div>
         <p><small>Price: {{ selectedMinPrice || minPrice | currency:'INR' }} - {{ selectedMaxPrice || maxPrice | currency:'INR' }}</small></p>
     </div>
-    
+   
     <div class="filter-section">
         <h3>Rating</h3>
         <div *ngFor="let rating of ratings" class="rating-checkbox-container">
@@ -104,3 +104,5 @@
         </div>
     </div>
 </div>
+ 
+ 

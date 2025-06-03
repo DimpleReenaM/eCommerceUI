@@ -7,7 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class PraginationComponent {
   @Input() pageItems = 240;
-  @Input() currentPage = 0;
+  @Input() currentPage = 1; 
   @Input() pageSize = 20;
 
   @Output() pageChange = new EventEmitter<number>();
@@ -17,26 +17,23 @@ export class PraginationComponent {
   }
 
   getPaginationArray(): number[] {
-    var pages = [];
-    if (this.totalPages < 5) {
-      for (let index = 0; index < this.totalPages; index++) {
-        pages.push(index);
-
+    const pages = [];
+    if (this.totalPages <= 5) {
+      for (let i = 1; i <= this.totalPages; i++) {
+        pages.push(i);
       }
-      return pages;
-    }
-    if (this.currentPage <= 3) {
-      pages.push(0, 1, 2, 3, -1, this.totalPages - 1);
-    } else if (this.currentPage >= this.totalPages - 3) {
-      pages.push(0, -1, this.totalPages - 4, this.totalPages - 3, this.totalPages - 2, this.totalPages - 1);
+    } else if (this.currentPage <= 3) {
+      pages.push(1, 2, 3, 4, -1, this.totalPages);
+    } else if (this.currentPage >= this.totalPages - 2) {
+      pages.push(1, -1, this.totalPages - 3, this.totalPages - 2, this.totalPages - 1, this.totalPages);
     } else {
-      pages.push(-1, this.currentPage - 1, this.currentPage, this.currentPage + 1, -1)
+      pages.push(1, -1, this.currentPage - 1, this.currentPage, this.currentPage + 1, -1, this.totalPages);
     }
     return pages;
   }
 
   onPageChange(pageIndex: number) {
-    if (pageIndex >= 0 && pageIndex < this.totalPages) {
+    if (pageIndex >= 1 && pageIndex <= this.totalPages) {
       this.currentPage = pageIndex;
       this.pageChange.emit(pageIndex);
     }

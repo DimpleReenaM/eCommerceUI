@@ -36,7 +36,11 @@ export class LoginComponent implements OnInit {
         {
           next:(res)=>{
             if(res.isSuccessed==true) {
-              this.router.navigateByUrl("");
+              if (res.data?.userData.role === 'SELLER') {
+            this.router.navigateByUrl('/seller/dashboard');
+          } else {
+            this.router.navigateByUrl('/');
+          }
             }
             else{
               alert(res.message)

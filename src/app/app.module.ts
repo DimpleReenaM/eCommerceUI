@@ -26,8 +26,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { ForgetlinkComponent } from './Components/forgetlink/forgetlink.component';
 import { RegisterComponent } from './Seller/register/register.component';
-import { DashboardComponent } from './Seller/dashboard/dashboard.component';
 import { AddProductComponent } from './Seller/add-product/add-product.component';
+import { DashboardComponent } from './Seller/dashboard/dashboard.component';
+import { MatSliderModule } from '@angular/material/slider';
 
 
 
@@ -50,6 +51,7 @@ import { AddProductComponent } from './Seller/add-product/add-product.component'
     LayoutModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    MatSliderModule,
     HttpClientModule,
     StoreModule.forRoot(appStore),
     EffectsModule.forRoot(appEffects),

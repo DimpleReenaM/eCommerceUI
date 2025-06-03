@@ -42,7 +42,7 @@ export class FiltersComponent {
   @Input() selectedRating: number[]=[];
  
   @Input() minPrice: number=0;
-  @Input() maxPrice: number=30000;
+  @Input() maxPrice: number=100000;
   @Input() selectedMinPrice: number=this.minPrice;
   @Input() selectedMaxPrice: number=this.maxPrice;
 

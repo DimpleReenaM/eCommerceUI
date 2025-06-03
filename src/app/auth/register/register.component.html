@@ -1,59 +1,100 @@
 <app-notification></app-notification>
-<div class="login-container">
-  <div class="screen">
-    <div class="screen__content">
-      <form class="login" [formGroup]="RegistrationForm" (ngSubmit)="Register()">
-        <div class="login__field">
-          <i class="login__icon fas fa-user"></i>
-          <input type="text" name="username" class="login__input" formControlName="userName" placeholder="User name" autocomplete="off">
+<div class="register-container">
+  <div class="register-card">
+    <div class="card-header">
+      <h1>Create Account</h1>
+      <p>Join our community today</p>
+    </div>
+    
+    <div class="card-body">
+      <form class="register-form" [formGroup]="RegistrationForm" (ngSubmit)="Register()">
+        <!-- Username Field -->
+        <div class="form-group">
+          <label for="username">Username</label>
+          <div class="input-container">
+            <span class="input-icon">
+              <i class="fas fa-user"></i>
+            </span>
+            <input id="username" type="text" name="username" class="form-input" formControlName="userName" 
+                   placeholder="Enter your username" autocomplete="off">
+          </div>
           <div class="invalid-msg" *ngIf="RegistrationForm.get('userName')?.invalid && RegistrationForm.get('userName')?.dirty">
             <div *ngIf="RegistrationForm.get('userName')?.errors?.['required']">Username is required.</div> 
           </div>
         </div>
         
-        <div class="login__field">
-          <i class="login__icon fas fa-envelope"></i>
-          <input type="email" name="email" class="login__input" formControlName="email" placeholder="Email" autocomplete="off">
+        <!-- Email Field -->
+        <div class="form-group">
+          <label for="email">Email</label>
+          <div class="input-container">
+            <span class="input-icon">
+              <i class="fas fa-envelope"></i>
+            </span>
+            <input id="email" type="email" name="email" class="form-input" formControlName="email" 
+                   placeholder="Enter your email" autocomplete="off">
+          </div>
           <div class="invalid-msg" *ngIf="RegistrationForm.get('email')?.invalid && RegistrationForm.get('email')?.dirty">
             <div *ngIf="RegistrationForm.get('email')?.errors?.['required']">Email is required.</div> 
-            <div *ngIf="RegistrationForm.get('email')?.errors?.['email']">Invalid email</div> 
+            <div *ngIf="RegistrationForm.get('email')?.errors?.['email']">Invalid email format</div> 
           </div>
         </div>
         
-        <div class="login__field">
-          <i class="login__icon fas fa-lock"></i>
-          <input type="password" name="password" class="login__input" formControlName="password" placeholder="Password" autocomplete="off">
+        <!-- Password Field -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-container">
+            <span class="input-icon">
+              <i class="fas fa-lock"></i>
+            </span>
+            <input id="password" type="password" name="password" class="form-input" formControlName="password" 
+                   placeholder="Create a password" autocomplete="off">
+          </div>
           <div class="invalid-msg" *ngIf="RegistrationForm.get('password')?.invalid && RegistrationForm.get('password')?.dirty">
             <span *ngIf="RegistrationForm.get('password')?.errors?.['required']">Password is required.</span> 
           </div>
         </div>
         
-        <div class="login__field">
-          <i class="login__icon fas fa-lock"></i>
-          <input type="password" name="confirmPassword" class="login__input" formControlName="confirmPassword" placeholder="Confirm Password">
+        <!-- Confirm Password Field -->
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <div class="input-container">
+            <span class="input-icon">
+              <i class="fas fa-lock"></i>
+            </span>
+            <input id="confirmPassword" type="password" name="confirmPassword" class="form-input" 
+                   formControlName="confirmPassword" placeholder="Re-enter your password">
+          </div>
           <div class="invalid-msg" *ngIf="RegistrationForm.get('confirmPassword')?.invalid && RegistrationForm.get('confirmPassword')?.dirty">
             <span *ngIf="RegistrationForm.get('confirmPassword')?.errors?.['passwordMismatch']">Passwords do not match.</span> 
           </div>
         </div>
         
-        <div class="button-group">
-          <button class="button login__submit" type="submit">
-            <span class="button__text">Register Now</span>
-            <i class="button__icon fas fa-chevron-right"></i>
-          </button>
-          
-          <button class="button secondary" [routerLink]="['/auth/login']" type="button">
-            <span class="button__text">Log In Instead</span>
-            <i class="button__icon fas fa-sign-in-alt"></i>
-          </button>
+        <!-- Submit Button -->
+        <button class="primary-btn" type="submit" [disabled]="RegistrationForm.invalid">
+          <span>Register Now</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+
+         <div class="seller-link">
+          <p>Want to sell on our platform? <a [routerLink]="['/seller/register']">Become a Seller</a></p>
         </div>
       </form>
+      
+      <div class="divider">
+        <span>or</span>
+      </div>
+      
+    
+    
+    <div class="card-footer">
+      <p>Already have an account? <a [routerLink]="['/auth/login']">Log In</a></p>
     </div>
-    <div class="screen__background">
-      <span class="screen__background__shape screen__background__shape4"></span>
-      <span class="screen__background__shape screen__background__shape3"></span>		
-      <span class="screen__background__shape screen__background__shape2"></span>
-      <span class="screen__background__shape screen__background__shape1"></span>
-    </div>		
+  </div>
+  
+  <!-- Decorative Elements -->
+  <div class="decorative-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
   </div>
 </div>
