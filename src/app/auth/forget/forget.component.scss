@@ -1,0 +1,463 @@
+// Variables
+$primary-color: #3498db;
+$primary-dark: #2980b9;
+$error-color: #e74c3c;
+$warning-color: #f39c12;
+$success-color: #2ecc71;
+$light-gray: #ecf0f1;
+$medium-gray: #bdc3c7;
+$dark-gray: #95a5a6;
+$text-color: #2c3e50;
+$subtext-color: #7f8c8d;
+$white: #fff;
+$shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+$hover-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+
+// Mixins
+@mixin transition($property: all, $duration: 0.3s, $timing: ease) {
+  transition: $property $duration $timing;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes shackle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Base Styles
+.reset-password-container {
+  @include flex-center;
+  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.password-reset-card {
+  background: $white;
+  border-radius: 16px;
+  box-shadow: $shadow;
+  padding: 40px;
+  width: 100%;
+  max-width: 450px;
+  @include transition(transform box-shadow);
+  animation: fadeInUp 0.5s ease-out;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $hover-shadow;
+  }
+}
+
+.header {
+  text-align: center;
+     margin-bottom: 30px;
+ 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+  h2 {
+    color: $text-color;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 15px 0 5px;
+  }
+
+  .subtitle {
+    color: $subtext-color;
+    font-size: 14px;
+    margin: 0;
+  }
+}
+
+// Lock Icon Animation
+.lock-icon {
+  @include flex-center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba($primary-color, 0.1);
+  color: $primary-color;
+  margin-bottom: 10px !important;
+}
+
+.lock-animate {
+  animation: bounce 1s infinite alternate;
+
+  .lock-shackle {
+    animation: shackle 2s infinite ease-in-out;
+  }
+}
+
+// Form Styles
+.reset-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  position: relative;
+
+  &.floating {
+    label {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      color: $dark-gray;
+      font-size: 16px;
+      pointer-events: none;
+      @include transition;
+      background: $white;
+      padding: 0 5px;
+    }
+
+    input {
+      &:focus,
+      &:not(:placeholder-shown) {
+        ~ label {
+          top: -10px;
+          left: 10px;
+          font-size: 12px;
+          color: $primary-color;
+          background: $white;
+        }
+      }
+
+      &.invalid {
+        &:focus,
+        &:not(:placeholder-shown) {
+          ~ label {
+            color: $error-color;
+          }
+        }
+      }
+    }
+  }
+}
+
+.form-control {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid $light-gray;
+  border-radius: 8px;
+  font-size: 16px;
+  @include transition;
+  background-color: #f9f9f9;
+
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+    background-color: $white;
+    box-shadow: 0 0 0 3px rgba($primary-color, 0.2);
+  }
+
+  &.invalid {
+    border-color: $error-color;
+  }
+}
+
+// Password Strength Meter
+.password-strength {
+  height: 4px;
+  background: $light-gray;
+  border-radius: 2px;
+  margin-top: 8px;
+  overflow: hidden;
+
+  .strength-bar {
+    height: 100%;
+    width: 0;
+    @include transition(width background);
+
+    &.strength-weak {
+      width: 30%;
+      background: $error-color;
+    }
+
+    &.strength-medium {
+      width: 60%;
+      background: $warning-color;
+    }
+
+    &.strength-strong {
+      width: 100%;
+      background: $success-color;
+    }
+  }
+}
+
+// Error Message
+.error-message {
+  @include flex-center;
+  color: $error-color;
+  font-size: 13px;
+  margin-top: 8px;
+
+  svg {
+    margin-right: 5px;
+  }
+}
+
+// Submit Button
+.submit-btn {
+  background: linear-gradient(135deg, $primary-color 0%, $primary-dark 100%);
+  color: $white;
+  border: none;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  @include transition;
+  @include flex-center;
+  height: 50px;
+
+  &:hover:not(:disabled) {
+    background: linear-gradient(135deg, $primary-dark 0%, $primary-color 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba($primary-dark, 0.3);
+  }
+
+  &:disabled {
+    background: $medium-gray;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+}
+
+// Loading Spinner
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba($white, 0.3);
+  border-radius: 50%;
+  border-top-color: $white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+// Responsive Design
+@media (max-width: 600px) {
+  .password-reset-card {
+    padding: 30px 20px;
+  }
+
+  .header {
+    h2 {
+      font-size: 20px;
+    }
+  }
+
+  .form-control {
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  .submit-btn {
+    padding: 12px;
+    font-size: 15px;
+    height: 45px;
+  }
+
+}
+
+/* Toast Notification Styles */
+.toast-container {
+  position: fixed;
+  bottom: -100px;
+  right: 20px;
+  min-width: 300px;
+  max-width: 400px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 16px;
+  display: flex;
+  align-items: flex-start;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  
+  &.show {
+    opacity: 1;
+    bottom: 20px;
+    transform: translateY(0);
+    animation: bounce 0.5s;
+  }
+  
+  &.success {
+    border-left: 4px solid #4CAF50;
+    
+    .toast-icon svg {
+      fill: #4CAF50;
+    }
+    
+    .toast-progress {
+      background: linear-gradient(to right, #4CAF50, #8BC34A);
+    }
+  }
+  
+  &.error {
+    border-left: 4px solid #F44336;
+    
+    .toast-icon svg {
+      fill: #F44336;
+    }
+    
+    .toast-progress {
+      background: linear-gradient(to right, #F44336, #FF9800);
+    }
+  }
+  
+  &.warning {
+    border-left: 4px solid #FFC107;
+    
+    .toast-icon svg {
+      fill: #FFC107;
+    }
+    
+    .toast-progress {
+      background: linear-gradient(to right, #FFC107, #FFA000);
+    }
+  }
+  
+  .toast-icon {
+    margin-right: 12px;
+    flex-shrink: 0;
+    
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+  
+  .toast-message {
+    flex: 1;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
+  }
+  
+  .toast-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 12px;
+    padding: 0;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    
+    &:hover {
+      opacity: 1;
+    }
+    
+    svg {
+      width: 20px;
+      height: 20px;
+      fill: #666;
+    }
+  }
+  
+  .toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    border-radius: 0 0 8px 8px;
+    animation: progress 5s linear forwards;
+    transform-origin: left;
+  }
+}
+
+@keyframes progress {
+  0% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Password Strength Indicator */
+.password-strength {
+  margin-top: 4px;
+  height: 4px;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  
+  &.strength-weak {
+    width: 33%;
+    background: #F44336;
+  }
+  
+  &.strength-medium {
+    width: 66%;
+    background: #FFC107;
+  }
+  
+  &.strength-strong {
+    width: 100%;
+    background: #4CAF50;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .toast-container {
+    right: 10px;
+    left: 10px;
+    max-width: calc(100% - 20px);
+    min-width: auto;
+  }
+}

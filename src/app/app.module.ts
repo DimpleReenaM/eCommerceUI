@@ -21,10 +21,10 @@ import { AuthIntercetorInterceptor } from './core/interceptor/auth-intercetor.in
 import { appEffects, appStore } from './redux/store';
 import { NotificationModule } from './notification/notification.module';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { ForgetComponent } from './Components/forget/forget.component';
+import { ForgetComponent } from './auth/forget/forget.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
-import { ForgetlinkComponent } from './Components/forgetlink/forgetlink.component';
+import { ForgetlinkComponent } from './auth/forgetlink/forgetlink.component';
 import { RegisterComponent } from './Seller/register/register.component';
 import { AddProductComponent } from './Seller/add-product/add-product.component';
 import { DashboardComponent } from './Seller/dashboard/dashboard.component';

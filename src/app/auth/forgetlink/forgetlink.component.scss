@@ -1,0 +1,449 @@
+// Variables
+$primary-color: #4361ee;
+$secondary-color: #3f37c9;
+$error-color: #f72585;
+$text-color: #2b2d42;
+$light-gray: #f8f9fa;
+$white: #ffffff;
+$transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+$shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Keyframe Animations
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes circle-move {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(20px, -20px);
+  }
+  50% {
+    transform: translate(0, -40px);
+  }
+  75% {
+    transform: translate(-20px, -20px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+// Main Styles
+.forgot-password-container {
+  @include flex-center;
+  min-height: 100vh;
+  background-color: $light-gray;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  
+  .animation-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba($primary-color, 0.1);
+    z-index: 0;
+    
+    &.circle-1 {
+      width: 300px;
+      height: 300px;
+      top: -100px;
+      left: -100px;
+      animation: circle-move 15s infinite linear;
+    }
+    
+    &.circle-2 {
+      width: 200px;
+      height: 200px;
+      bottom: -50px;
+      right: -50px;
+      animation: circle-move 20s infinite linear reverse;
+    }
+  }
+  
+  .forgot-password-card {
+    background: $white;
+    border-radius: 16px;
+    box-shadow: $shadow;
+    padding: 40px;
+    width: 100%;
+    max-width: 480px;
+    position: relative;
+    z-index: 1;
+    transform: translateY(0);
+    transition: $transition;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    .card-header {
+      text-align: center;
+      margin-bottom: 30px;
+      
+      .lock-icon {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto 15px;
+        background: rgba($primary-color, 0.1);
+        border-radius: 50%;
+        @include flex-center;
+        animation: float 3s ease-in-out infinite;
+        
+        svg {
+          width: 30px;
+          height: 30px;
+          fill: $primary-color;
+        }
+      }
+      
+      h2 {
+        color: $text-color;
+        margin: 0 0 8px;
+        font-size: 24px;
+        font-weight: 600;
+      }
+      
+      p {
+        color: lighten($text-color, 20%);
+        margin: 0;
+        font-size: 14px;
+      }
+    }
+    
+    .forgot-password-form {
+      .form-group {
+        position: relative;
+        margin-bottom: 30px;
+        
+        label {
+          position: absolute;
+          top: 16px;
+          left: 12px;
+          color: lighten($text-color, 30%);
+          font-size: 14px;
+          pointer-events: none;
+          transition: $transition;
+        }
+        
+        .form-control {
+          width: 100%;
+          padding: 16px 12px 4px;
+          border: none;
+          border-radius: 0;
+          background: transparent;
+          border-bottom: 1px solid lighten($text-color, 60%);
+          font-size: 16px;
+          color: $text-color;
+          transition: $transition;
+          
+          &:focus {
+            outline: none;
+            border-bottom-color: $primary-color;
+            
+            + label {
+              transform: translateY(-12px) scale(0.8);
+              color: $primary-color;
+            }
+            
+            ~ .underline {
+              transform: scaleX(1);
+            }
+          }
+          
+          &:not(:placeholder-shown) + label {
+            transform: translateY(-12px) scale(0.8);
+          }
+        }
+        
+        .underline {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background: $primary-color;
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: $transition;
+        }
+        
+        .error-message {
+          display: flex;
+          align-items: center;
+          margin-top: 8px;
+          color: $error-color;
+          font-size: 12px;
+          opacity: 0;
+          transform: translateY(-10px);
+          transition: $transition;
+          
+          svg {
+            width: 14px;
+            height: 14px;
+            fill: $error-color;
+            margin-right: 6px;
+          }
+        }
+        
+        &.has-error {
+          .error-message {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          
+          .form-control {
+            border-bottom-color: $error-color;
+            
+            + label {
+              color: $error-color;
+            }
+          }
+          
+          .underline {
+            background: $error-color;
+          }
+        }
+      }
+      
+      .submit-btn {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, $primary-color, $secondary-color);
+        color: $white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: $transition;
+        overflow: hidden;
+        position: relative;
+        @include flex-center;
+        
+        &:hover:not(:disabled) {
+          background: linear-gradient(135deg, darken($primary-color, 5%), darken($secondary-color, 5%));
+          box-shadow: 0 4px 12px rgba($primary-color, 0.3);
+          animation: pulse 1s ease-in-out;
+          
+          .btn-icon {
+            transform: translateX(5px);
+          }
+        }
+        
+        &:active:not(:disabled) {
+          transform: scale(0.98);
+        }
+        
+        &:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
+        }
+        
+        .btn-text {
+          position: relative;
+          z-index: 1;
+        }
+        
+        .btn-icon {
+          margin-left: 8px;
+          transition: $transition;
+          
+          svg {
+            width: 18px;
+            height: 18px;
+            fill: $white;
+          }
+        }
+      }
+    }
+    
+    .back-to-login {
+      text-align: center;
+      margin-top: 20px;
+      
+      a {
+        color: lighten($text-color, 20%);
+        text-decoration: none;
+        font-size: 14px;
+        transition: $transition;
+        
+        &:hover {
+          color: $primary-color;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+// Responsive Adjustments
+@media (max-width: 600px) {
+  .forgot-password-container {
+    padding: 15px;
+    
+    .forgot-password-card {
+      padding: 30px 20px;
+      
+      .card-header {
+        margin-bottom: 20px;
+        
+        h2 {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .forgot-password-container {
+    .forgot-password-card {
+      padding: 25px 15px;
+    }
+  }
+}
+
+// Toast Styles
+.toast-container {
+  position: fixed;
+  bottom: -100px;
+  right: 20px;
+  min-width: 300px;
+  max-width: 400px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  
+  &.show {
+    opacity: 1;
+    bottom: 20px;
+    transform: translateY(0);
+  }
+  
+  &.success {
+    border-left: 4px solid #4caf50;
+    
+    .toast-icon svg {
+      fill: #4caf50;
+    }
+    
+    .toast-progress {
+      background: linear-gradient(to right, #4caf50, #8bc34a);
+    }
+  }
+  
+  &.error {
+    border-left: 4px solid #f44336;
+    
+    .toast-icon svg {
+      fill: #f44336;
+    }
+    
+    .toast-progress {
+      background: linear-gradient(to right, #f44336, #ff9800);
+    }
+  }
+  
+  .toast-icon {
+    margin-right: 12px;
+    
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+  
+  .toast-message {
+    flex: 1;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .toast-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 12px;
+    padding: 0;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    
+    &:hover {
+      opacity: 1;
+    }
+    
+    svg {
+      width: 20px;
+      height: 20px;
+      fill: #666;
+    }
+  }
+  
+  .toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    border-radius: 0 0 8px 8px;
+    animation: progress 4s linear forwards;
+    transform-origin: left;
+  }
+}
+
+@keyframes progress {
+  0% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(0);
+  }
+}
+
+// Responsive adjustment
+@media (max-width: 600px) {
+  .toast-container {
+    right: 10px;
+    left: 10px;
+    max-width: calc(100% - 20px);
+    min-width: auto;
+  }
+}

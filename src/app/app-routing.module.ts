@@ -11,8 +11,8 @@ import { PaymentstatusComponent } from './Components/paymentstatus/paymentstatus
 import { UserOrdersComponent } from './order/user-orders/user-orders.component';
 import { ToastComponent } from './Components/toast/toast.component';
 import { OrderDetailsComponent } from './order/order-details/order-details.component';
-import { ForgetComponent } from './Components/forget/forget.component';
-import { ForgetlinkComponent } from './Components/forgetlink/forgetlink.component';
+import { ForgetComponent } from './auth/forget/forget.component';
+import { ForgetlinkComponent } from './auth/forgetlink/forgetlink.component';
 import { RegisterComponent } from './Seller/register/register.component';
 import { DashboardComponent } from './Seller/dashboard/dashboard.component';
 import { AddProductComponent } from './Seller/add-product/add-product.component';
@@ -55,13 +55,8 @@ const routes: Routes = [
         loadChildren:()=>import('./order/order.module').then(m=>m.OrderModule),
         //canActivate:[authGuard]
       },
-      // {
-      //   path:"forget",
-      //   component:ForgetlinkComponent
-      // },
-      {
-        path: 'reset-password', component: ForgetComponent },
-        
+      
+    
 
 
         
