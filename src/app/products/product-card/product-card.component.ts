@@ -55,4 +55,10 @@ addToCart(productId: number) {
   addToWishList(productId:number){
     this.store.dispatch(AddToWishList({productId}))
   }
+
+  ceilRating(rating: number): number {
+  return Math.round (rating);
+}
+
+  
 }

@@ -1,12 +1,15 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
+import { CatalogService } from 'src/app/core/Services/catalog.service';
 
 @Component({
   selector: 'app-sort-header',
   templateUrl: './sort-header.component.html',
   styleUrls: ['./sort-header.component.css']
 })
-export class SortHeaderComponent {
+export class SortHeaderComponent implements OnInit{
+  productCount: number = 0;
+
   readonly showOptions: number[] = [10, 20, 30, 50, 100];
   readonly sortOptions = [
     {
@@ -30,9 +33,18 @@ export class SortHeaderComponent {
       sortCode:'newest'
     }
 ];
+constructor(private sharedService:  CatalogService) {}
+ngOnInit(): void {
+  this.sharedService.productCount$.subscribe((count) => {
+    this.productCount = count;
+  });
+}
+
 
   @Input() itemsToShow:number=10;
   @Input() sortBy: string = 'featured';
+    @Input() pageItems: number = 0;
+
 
   @Output() sortHeaderChanges = new EventEmitter<any>();
 

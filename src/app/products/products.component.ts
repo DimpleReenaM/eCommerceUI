@@ -18,7 +18,7 @@ export class ProductsComponent implements OnInit {
   maxPrice!: number;
   minPrice!: number;
 
-  constructor(private catalogService: CatalogService) {}
+  constructor(private catalogService: CatalogService) { }
 
   ngOnInit(): void {
     this.filters$.subscribe((filter) => {
@@ -26,6 +26,8 @@ export class ProductsComponent implements OnInit {
         console.log(res);
         if (res.data?.count !== undefined) {
           this.pageItems = res.data.count;
+          this.catalogService.updateProductCount(this.pageItems); // ✅ update shared count
+
         }
         if (res.data?.minPrice !== undefined) {
           this.minPrice = res.data.minPrice;

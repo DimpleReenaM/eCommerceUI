@@ -1,19 +1,34 @@
 <div class="container my-5">
     <div class="row">
         <div class="col-3">
-                <app-filters 
-                [minPrice]="minPrice" 
-                [maxPrice]="maxPrice" 
-                (filtersChanged)="filtersChanged($event)"></app-filters>   
+            <app-filters [minPrice]="minPrice" [maxPrice]="maxPrice"
+                (filtersChanged)="filtersChanged($event)"></app-filters>
         </div>
         <div class="col-9">
             <app-sort-header (sortHeaderChanges)="sortFiltersChanged($event)"></app-sort-header>
-            <div class="product-grid-3 mt-5 mb-5">
-                <app-product-card *ngFor="let p of products" [product]="p"></app-product-card>
+            <div *ngIf="products?.length === 0" class="no-products-container">
+                <mat-card class="no-products-card">
+                    <mat-card-content class="card-content">
+                        <div class="illustration-container">
+                            <mat-icon class="illustration-icon">search_off</mat-icon>
+                        </div>
+                        <h3 class="title">No products match your search</h3>
+                        <p class="subtitle">Try adjusting your filters or search terms</p>
+                        <button mat-stroked-button color="primary" class="action-button">
+                            <mat-icon>filter_alt</mat-icon>
+                            Adjust Filters
+                        </button>
+                    </mat-card-content>
+                </mat-card>
             </div>
-            <app-pragination [pageItems]="pageItems" [pageSize]="pageSize" [currentPage]="pageIndex"
-                (pageChange)="display($event)"></app-pragination>
+            <div class="row mt-5 mb-5">
+                <div class="col-md-4 mb-4" *ngFor="let p of products">
+                    <app-product-card [product]="p"></app-product-card>
+                </div>
+            </div>
+            <app-pragination *ngIf="(products?.length ?? 0) > 0" [pageItems]="pageItems" [pageSize]="pageSize"
+                [currentPage]="pageIndex" (pageChange)="display($event)">
+            </app-pragination>
         </div>
     </div>
 </div>
-

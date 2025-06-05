@@ -3,11 +3,14 @@ import { ResponseDto } from '../Models/response';
 import { BrandResDto, CategoryResDto, ProductFilters, ProductPaginationRes, ProductResDto } from '../Models/catalog';
 import { HttpClient } from '@angular/common/http';
 import { Pagination } from '../Models/pagination';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CatalogService {
+   private productCountSource = new BehaviorSubject<number>(0);
+  productCount$ = this.productCountSource.asObservable();
 
   constructor(private http:HttpClient){}
 
@@ -24,5 +27,8 @@ export class CatalogService {
   }
   getProductById(productId:string){
     return this.http.get<ResponseDto<ProductResDto>>('Catalog/product/'+productId);
+  }
+   updateProductCount(count: number) {
+    this.productCountSource.next(count);
   }
 }

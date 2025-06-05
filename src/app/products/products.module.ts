@@ -50,7 +50,8 @@ import { MatSliderModule } from '@angular/material/slider';
 
     HttpClientModule,
 
-    SharedModule
+    SharedModule,
+  
 
   ],
   exports:[
